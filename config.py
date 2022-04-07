@@ -8,4 +8,3 @@ class Vars:
     LOG_GROUP_ID = -100663943124
 
     COMMAND_HANDLER = "."
-
