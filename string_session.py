@@ -12,4 +12,6 @@ with TelegramClient(StringSession(), API_ID, API_HASH) as client:
     print(client.session.save())
     client.send_message("me", client.session.save())
 
-print("This String session has been saved in 'saved messages' in your account.")
+print(
+    "This String session has been saved in 'saved messages' in your account."
+)
