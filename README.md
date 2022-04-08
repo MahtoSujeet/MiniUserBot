@@ -1,6 +1,6 @@
 # MiniBot
-##**The Bot is in development phase and hence not recommened for deployment.**
-##A Mininal yet Powerful Telegram Userbot.
+## **The Bot is in development phase and hence not recommened for deployment.**
+## A Mininal yet Powerful Telegram Userbot.
 
 This telegram userbot only has the minimal features that you need,
 making it **the fasttest** userbot out there.
