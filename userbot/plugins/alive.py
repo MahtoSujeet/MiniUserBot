@@ -1,10 +1,10 @@
-from userbot.core import client
+from userbot.core import minibot
 from telethon import events
 from config import Vars
 
 print("alive")
 
-@client.on(
+@minibot.on(
     events.NewMessage(outgoing=True, pattern=f"{Vars.COMMAND_HANDLER}alive")
 )
 async def alive(client):
