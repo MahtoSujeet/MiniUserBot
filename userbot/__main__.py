@@ -1,9 +1,13 @@
-from .core import minibot
+import asyncio
+
+from .core.session import miniub
 from .core.logger import logging
 from . import plugins
 
-LOGS = logging.getLogger("MiniBot")
+LOGS = logging.getLogger("MiniUserBot")
 
-minibot.start()
+miniub.start()
+
 LOGS.info("Bot started successfully!")
-minibot.run_until_disconnected()
+print(miniub.list_event_handlers())
+miniub.run_until_disconnected()

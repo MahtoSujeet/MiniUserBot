@@ -15,4 +15,4 @@ for file in os.listdir(os.path.dirname(__file__)):
     try:
         pm.install_plugin(module_name)
     except Exception as e:
-        LOGS.error(f"{module_name} plugin failed to install with exception {e}")
+        LOGS.error(f"{module_name} install failed: {e}")

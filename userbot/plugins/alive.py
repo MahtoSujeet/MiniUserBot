@@ -1,14 +1,15 @@
-from userbot.core import minibot
-from telethon import events
-from config import Vars
-
-from userbot import __version__ as minibot_ver
 from platform import python_version
-from telethon import __version__ as telever
 from datetime import datetime
 
+from telethon import __version__ as telever, events
 
-@minibot.on(events.NewMessage(outgoing=True, pattern=f"{Vars.COMMAND_HANDLER}alive"))
+# Relative import of ..core didnt work
+# TODO find out why
+from userbot.core.session import miniub
+from userbot import __version__ as minibot_ver
+
+
+@miniub.client_cmd(command="alive")
 async def alive(client):
 
     start = datetime.now()
@@ -25,3 +26,4 @@ Python version: `{python_version()}
 """
 
     await client.edit(alive_msg)
+

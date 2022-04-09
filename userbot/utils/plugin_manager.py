@@ -1,6 +1,6 @@
-from ..core import minibot
-from importlib import util
 import os
+from importlib import util
+
 from ..core.logger import logging
 
 LOGS = logging.getLogger("PluginManager")
@@ -17,11 +17,11 @@ class PluginManager:
 
         if shortname.startswith("__"):
             return
-
         path = os.path.join(plugin_path, (shortname + ".py"))
-        name = path.replace("/", ".")[1:]
+        name = path.replace("/", ".")
 
         spec = util.spec_from_file_location(name=name, location=path)
+        print(name)
         spec.loader.load_module(name)
 
         LOGS.info(f"{shortname} has installed successfully!")
