@@ -27,13 +27,16 @@ class MiniUserBotCient(TelegramClient):
 
     def client_cmd(
         self: TelegramClient,
+        command: str,
         pattern: str | tuple | None = None,
-        command: str | tuple | None = None,
         group_only: bool = False,
         private_only: bool = False,
     ) -> Callable:
         if command is not None:
-            pattern = Config.COMMAND_HANDLER + command
+            command = Config.COMMAND_HANDLER + command
+
+        if pattern is None:
+            pattern = command
 
         def decorator(func):
             async def wrapper(event):

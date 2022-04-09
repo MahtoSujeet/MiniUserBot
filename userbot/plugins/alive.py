@@ -11,19 +11,21 @@ from userbot import __version__ as minibot_ver
 
 @miniub.client_cmd(command="alive")
 async def alive(client):
+    print(client.sender_id)
+    print(client.sender.first_name)
 
     start = datetime.now()
     await client.edit("`Checking!......`")
     end = datetime.now()
     ping = (end - start).microseconds / 1000
 
-    alive_msg = f"""**I am running!**
-Master: **Sujeet**
-Ping: `{ping} ms`
-MiniUserBot: `{minibot_ver}`
-Telethon version: `{telever}`
-Python version: `{python_version()}
+    alive_msg = f"""**☬  MiniUserBot is successfully working!  ☬**
+
+➽  **Master**: [{client.sender.first_name}](tg://user?id={client.sender_id})
+➽  **Ping**: `{ping} ms`
+➽  **MiniUserBot**: `{minibot_ver}`
+➽  **Telethon version**: `{telever}`
+➽  **Python version**: `{python_version()}`
 """
 
     await client.edit(alive_msg)
-
