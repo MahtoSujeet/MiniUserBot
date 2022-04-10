@@ -3,7 +3,7 @@ from importlib import util
 
 from ..core.logger import logging
 
-LOGS = logging.getLogger("PluginManager")
+LOGS = logging.getLogger(__name__)
 
 
 class PluginManager:
@@ -21,7 +21,6 @@ class PluginManager:
         name = path.replace("/", ".")
 
         spec = util.spec_from_file_location(name=name, location=path)
-        print(name)
         spec.loader.load_module(name)
 
-        LOGS.info(f"{shortname} has installed successfully!")
+        LOGS.info(f"{shortname} installed!")
