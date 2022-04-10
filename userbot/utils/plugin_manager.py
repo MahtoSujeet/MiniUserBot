@@ -1,26 +1,54 @@
-import os
 from importlib import util
+from glob import glob
+import os
+from pathlib import Path
 
 from ..core.logger import logging
 
 LOGS = logging.getLogger(__name__)
 
 
-class PluginManager:
+def load_module(shortname: str, plugin_path="", type=None):
+    """Installs plugins.
 
-    @staticmethod
-    def install_plugin(shortname: str, plugin_path="userbot/plugins"):
-        """Installs plugins.
+    :param shrotname: Name of the plugin file without extension.
+    :param plugin_path (optional): PathLike : directory path of the module file. default: root directory
+    :param type (optional): "assistant" or default(plugins)
+    """
+    if shortname.startswith("__"):
+        return
 
-        :param shrotname: Name of the plugin file without extension.
-        """
+    # path is used for path reference eg. "package/module.py"
+    path = (f"{plugin_path}/{shortname}.py") if plugin_path else (f"{shortname}.py")
+    # name is used to module referece eg. "packeage.module"
 
-        if shortname.startswith("__"):
-            return
-        path = os.path.join(plugin_path, (shortname + ".py"))
-        name = path.replace("/", ".")
+    # Specifying module name, using match statement to that it would be easy to add more types of plugins
+    match type:
+        case None:
+            name = f"userbot.plugins.{shortname}"
+        case "assistant":
+            name = f"userbot.assistant.{shortname}"
+        case _:
+            raise ImportError("Unknown plugin type: {type}")
 
-        spec = util.spec_from_file_location(name=name, location=path)
-        spec.loader.load_module(name)
+    spec = util.spec_from_file_location(name=name, location=path)
+    mod = util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
 
-        LOGS.info(f"{shortname} installed!")
+    LOGS.info(f"{shortname} installed!")
+
+
+def load_plugins_from_folder(folder):
+    """Load all plugins of a folder."""
+    modules = glob(f"userbot/{folder}/*.py")
+    modules.sort()
+
+    for module in modules:
+        path = os.path.dirname(module)
+        shortname = Path(module).stem
+
+        try:
+            load_module(shortname, path)
+
+        except ImportError as e:
+            LOGS.error(f"{shortname} install failed! {e}")

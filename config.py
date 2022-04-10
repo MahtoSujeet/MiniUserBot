@@ -15,3 +15,7 @@ class Config:
     LOG_GROUP_ID = os.getenv("LOG_GROUP_ID")
 
     COMMAND_HANDLER = os.getenv("COMMAND_HANDLER")
+
+    ALIVE_NAME = os.getenv("ALIVE_NAME")
+
+    USERID = os.getenv("USERID")

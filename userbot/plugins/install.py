@@ -1,8 +1,8 @@
 import os
 
 from userbot import miniub
-from userbot.utils.plugin_manager import PluginManager as pm
-from userbot.core.tg_manager import edit_delete
+from userbot.utils import plugin_manager as pm
+from ..core.tg_manager import edit_delete
 
 
 @miniub.client_cmd(command="install")
@@ -23,10 +23,8 @@ async def _(event):
             return await event.edit(f"`Download failed! {e}`")
 
     try:
-        # second para is to make plugins_path to root
-        # TODO fix this plugin path shit
-        pm.install_plugin("file", "")
-    except Exception as e:
+        pm.load_module("file")
+    except ImportError as e:
         return await event.edit(f"`Install failed! {e}`")
     os.remove("file.py")
     return await event.edit("`Plugin install successfully!`")
