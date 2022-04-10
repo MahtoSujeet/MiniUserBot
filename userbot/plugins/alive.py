@@ -7,6 +7,7 @@ from telethon import __version__ as telever, events
 # TODO find out why
 from userbot.core.session import miniub
 from userbot import __version__ as minibot_ver
+from . import USERID, ALIVE_NAME
 
 
 @miniub.client_cmd(command="alive")
@@ -18,7 +19,7 @@ async def alive(client):
 
     alive_msg = f"""**☬  MiniUserBot is successfully working!  ☬**
 
-➽  **Master**: [{client.sender.first_name}](tg://user?id={client.sender_id})
+➽  **Master**: [{ALIVE_NAME}](tg://user?id={USERID})
 ➽  **Ping**: `{ping} ms`
 ➽  **MiniUserBot**: `{minibot_ver}`
 ➽  **Telethon version**: `{telever}`

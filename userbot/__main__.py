@@ -1,11 +1,11 @@
 from .core.session import miniub
 from .core.logger import logging
-from .plugins import install_plugins
+from .utils import plugin_manager as pm
 
 LOGS = logging.getLogger("MiniUserBot")
 
 LOGS.info("Preparing to Install Plugins....")
-install_plugins()
+pm.load_plugins_from_folder("plugins")
 
 miniub.start()
 LOGS.info("Bot started successfully!")
