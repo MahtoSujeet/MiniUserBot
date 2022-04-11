@@ -11,7 +11,7 @@ from ..core.constants import USERID, ALIVE_NAME
 
 
 @miniub.client_cmd(command="alive")
-async def alive(client):
+async def _(client):
     start = datetime.now()
     await client.edit("`Checking!......`")
     end = datetime.now()

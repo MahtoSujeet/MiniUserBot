@@ -27,8 +27,8 @@ class MiniUserBotCient(TelegramClient):
 
     def client_cmd(
         self: TelegramClient,
-        command: str,
-        pattern: str | tuple | None = None,
+        command,
+        pattern= None,
         group_only: bool = False,
         private_only: bool = False,
     ) -> Callable:
