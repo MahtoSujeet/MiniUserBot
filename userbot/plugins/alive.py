@@ -7,7 +7,7 @@ from telethon import __version__ as telever
 # TODO find out why
 from userbot.core.session import miniub
 from userbot import __version__ as minibot_ver
-from . import USERID, ALIVE_NAME
+from ..core.constants import USERID, ALIVE_NAME
 
 
 @miniub.client_cmd(command="alive")
