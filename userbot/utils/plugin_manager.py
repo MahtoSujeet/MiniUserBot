@@ -24,12 +24,12 @@ def load_module(shortname: str, plugin_path="", type=None):
 
     # Specifying module name, using match statement to that it would be easy to add more types of plugins
     match type:
-        case "":
+        case None:
             name = f"userbot.plugins.{shortname}"
         case "assistant":
             name = f"userbot.assistant.{shortname}"
         case _:
-            raise ImportError("Unknown plugin type: {type}")
+            raise ImportError(f"Unknown plugin type: {type}")
 
     spec = util.spec_from_file_location(name=name, location=path)
     mod = util.module_from_spec(spec)
@@ -38,7 +38,7 @@ def load_module(shortname: str, plugin_path="", type=None):
     LOGS.info(f"{shortname} installed!")
 
 
-def load_plugins_from_folder(folder, type=""):
+def load_plugins_from_folder(folder, type=None):
     """Load all plugins of a folder."""
     modules = glob(f"userbot/{folder}/*.py")
     modules.sort()
