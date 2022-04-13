@@ -1,19 +1,23 @@
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+
 class Config:
-    API_ID = 17319854
+    API_ID = os.getenv("API_ID")
 
-    API_HASH = "a3eee196687602df72441b9720afabb1"
+    API_HASH = os.getenv("API_HASH")
 
-    SESSION_STRING = "1BVtsOIQBuxnCmK35iJzdS0PN-lTKECH6VrBbZrokk1UCrPln__sCW_XQS1V32e-UMsRBUzSshHXycDg8ca7eYMC7HsZfuEkA7WqKU7OSDN_zg_4YZfMbY4rtWOKa2h-4YcKa_P55B9EfrdJhc7k7Q7RM43k2Qxsc1KgGRhUcg-7GoL_tJ-tSb2JJQxNa11hAz2wZ8Bnocgp3RN45JQQ6tLeUn2SW3HJj1cy8fJR1SAjm5YiqptQoBwRQnS_S4Q27EGKVOMJV9A2GWW9mYPrGjJSykk2BlCUpVcza_jcoWrBKFXD9Wf6oCdWdFikqiZhLZ4jkjd0Se4VkucdmZRGb_rTkCj7Vdko="
+    SESSION_STRING = os.getenv("SESSION_STRING")
 
-    LOG_GROUP_ID = -100663943124
+    LOG_GROUP_ID = os.getenv("LOG_GROUP_ID")
 
-    COMMAND_HANDLER = "."
+    COMMAND_HANDLER = os.getenv("COMMAND_HANDLER")
 
-    USERID = 5246472555
+    ALIVE_NAME = os.getenv("ALIVE_NAME")
 
-    ALIVE_NAME = "Sujeet"
+    USERID = os.getenv("USERID")
 
-    BOT_TOKEN = "5069706077:AAFqUAYp4yIWUAJxIgGa1hhqAy3K0-vctVA"
-
-    # optional
-    SAVE_GROUP_ID = -1001576544273
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
