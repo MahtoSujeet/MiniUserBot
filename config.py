@@ -21,3 +21,6 @@ class Config:
     USERID = os.getenv("USERID")
 
     BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+    # Optional
+    SAVE_GROUP_ID = os.getenv("SAVE_GROUP_ID")
