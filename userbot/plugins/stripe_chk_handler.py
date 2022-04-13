@@ -1,4 +1,3 @@
-import asyncio
 import re
 
 from userbot import miniub
@@ -18,6 +17,6 @@ async def _(event):
     result = await stripe_chk.check(ccn, month, year, cvc)
 
     await msg.edit(
-        f"""**Card:** `{card}`
+        f"""**Card:** `{"|".join(card)}`
 **Result:** `{result}`"""
     )
