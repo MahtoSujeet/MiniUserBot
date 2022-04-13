@@ -1,3 +1,4 @@
+import re
 from typing import Callable
 import asyncio
 
@@ -28,15 +29,18 @@ class MiniUserBotCient(TelegramClient):
     def client_cmd(
         self: TelegramClient,
         command,
-        pattern= None,
+        pattern=None,
         group_only: bool = False,
         private_only: bool = False,
     ) -> Callable:
-        if command is not None:
-            command = Config.COMMAND_HANDLER + command
+        # if command is not None:
+        #     command = Config.COMMAND_HANDLER + command
 
-        if pattern is None:
-            pattern = command
+        pattern = (
+            re.compile(rf"\{Config.COMMAND_HANDLER}" + command)
+            if pattern is None
+            else rf"\{Config.COMMAND_HANDLER}" + pattern
+        )
 
         def decorator(func):
             async def wrapper(event):
