@@ -5,7 +5,7 @@ from ..core.tg_manager import edit_delete
 from config import Config
 
 
-@miniub.client_cmd(command="psave", pattern=r"psave\s*([(\d|a-z)+])?")
+@miniub.client_cmd(command="psave", pattern=r"psave\s*([\da-z]+)?")
 async def _(event):
     if Config.SAVE_GROUP_ID is None:
         return await edit_delete(
@@ -18,20 +18,23 @@ async def _(event):
 
     no_of_msg = event.pattern_match.group(1)
     if no_of_msg == "all":
-        msg_ids = list()
-        for msg in event.client.iter_messages(reply_msg.chat_id, min_id=reply_msg.id):
-            if msg.id == reply_msg.id:
-                msg_ids.append(msg.id)
+        msg_ids = {reply_msg.id}
+        async for msg in event.client.iter_messages(reply_msg.chat_id, min_id=reply_msg.id, reverse=True):
+            await msg.forward_to("me")
+            print(msg.sender_id, reply_msg.sender_id)
+            if msg.sender_id == reply_msg.sender_id:
+                msg_ids.add(msg.id)
             else:
                 break
-        return await event.client.forward_messages(
+        await event.client.forward_messages(
             Config.SAVE_GROUP_ID, msg_ids, from_peer=reply_msg.chat_id
         )
-
-    try:
-        no_of_msg = int(no_of_msg)
-    except ValueError:
-        return await edit_delete(event, "`Please provide a valid argument`")
+        return await edit_delete(event, f"`Saved {len(msg_ids)} messages.`")
+    if no_of_msg:
+        try:
+            no_of_msg = int(no_of_msg)
+        except ValueError:
+            return await edit_delete(event, "`Please provide a valid argument`")
 
     if not (reply_msg.photo or reply_msg.video or reply_msg.document):
         return await edit_delete(
