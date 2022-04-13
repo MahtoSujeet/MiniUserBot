@@ -2,6 +2,7 @@ from importlib import util
 from glob import glob
 import os
 from pathlib import Path
+import sys
 
 from ..core.logger import logging
 
@@ -30,6 +31,9 @@ def load_module(shortname: str, plugin_path="", type=None):
             name = f"userbot.assistant.{shortname}"
         case _:
             raise ImportError(f"Unknown plugin type: {type}")
+
+    if name in sys.modules.keys():
+        sys.modules.pop(name)
 
     spec = util.spec_from_file_location(name=name, location=path)
     mod = util.module_from_spec(spec)
