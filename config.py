@@ -19,3 +19,5 @@ class Config:
     ALIVE_NAME = os.getenv("ALIVE_NAME")
 
     USERID = os.getenv("USERID")
+
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
