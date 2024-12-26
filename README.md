@@ -8,6 +8,7 @@
 This telegram userbot only has the minimal features that you need,
 making it **the fasttest** userbot out there.
 
+![Demo GIF](./assets/demo.gif)
 
 Although it does come with many feature out of the box, one can still install plugins
 to get more features.
